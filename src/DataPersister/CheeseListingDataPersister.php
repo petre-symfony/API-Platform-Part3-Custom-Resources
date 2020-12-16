@@ -6,6 +6,7 @@ namespace App\DataPersister;
 
 use ApiPlatform\Core\DataPersister\DataPersisterInterface;
 use App\Entity\CheeseListing;
+use App\Entity\CheeseNotification;
 use Doctrine\ORM\EntityManagerInterface;
 
 class CheeseListingDataPersister implements DataPersisterInterface {
@@ -30,9 +31,11 @@ class CheeseListingDataPersister implements DataPersisterInterface {
    */
   public function persist($data) {
     $originalData = $this->entityManager->getUnitOfWork()->getOriginalEntityData($data);
-    dump($originalData);
-    if ($data->getIsPublished()) {
-      //hmm, not enough to know that it was JUST published
+    $wasAlreadyPublished = $originalData['isPublished'] ?? false;
+    if ($data->getIsPublished() && !$wasAlreadyPublished) {
+      $notification = new CheeseNotification($data, 'CheeseListing was created');
+      $this->entityManager->persist($notification);
+      //$this->entityManager->flush();
     }
 
     $this->decoratedDataPersister->persist($data);
