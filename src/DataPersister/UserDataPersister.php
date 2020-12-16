@@ -31,7 +31,9 @@ class UserDataPersister implements ContextAwareDataPersisterInterface {
    * @param User $data
    */
   public function persist($data, array $context = []) {
-    dump($context);
+    if (($context['item_operation_name'] ?? null) === 'put'){
+      $this->logger->info(sprintf('User %s is being updated', $data->getEmail()));
+    };
     if (!$data->getId()) {
       // take any actions for a new user
       // send registration email
