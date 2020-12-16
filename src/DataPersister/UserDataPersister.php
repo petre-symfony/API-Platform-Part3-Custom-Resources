@@ -2,12 +2,13 @@
 
 namespace App\DataPersister;
 
+use ApiPlatform\Core\DataPersister\ContextAwareDataPersisterInterface;
 use ApiPlatform\Core\DataPersister\DataPersisterInterface;
 use App\Entity\User;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
-class UserDataPersister implements DataPersisterInterface {
+class UserDataPersister implements ContextAwareDataPersisterInterface {
   private $decoratedDataPersister;
   private $userPasswordEncoder;
   private $logger;
@@ -22,14 +23,15 @@ class UserDataPersister implements DataPersisterInterface {
     $this->logger = $logger;
   }
 
-  public function supports($data): bool {
+  public function supports($data, array $context = []): bool {
     return $data instanceof User;
   }
 
   /**
    * @param User $data
    */
-  public function persist($data) {
+  public function persist($data, array $context = []) {
+    dump($context);
     if (!$data->getId()) {
       // take any actions for a new user
       // send registration email
@@ -47,7 +49,7 @@ class UserDataPersister implements DataPersisterInterface {
     $this->decoratedDataPersister->persist($data);
   }
 
-  public function remove($data) {
+  public function remove($data, array $context = []) {
     $this->decoratedDataPersister->remove($data);
   }
 }
