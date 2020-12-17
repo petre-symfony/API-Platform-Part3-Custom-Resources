@@ -22,15 +22,24 @@ class ValidIsPublishedValidator extends ConstraintValidator {
 		}
 
 		$originalData = $this->entityManager->getUnitOfWork()->getOriginalEntityData($value);
-		dd($originalData);
 
-		if (null === $value || '' === $value) {
+		$previousIsPublished = $originalData['isPublished'] ?? false;
+		if ($previousIsPublished === $value->getIsPublished()) {
+			// isPublished didn't change
 			return;
 		}
 
-		// TODO: implement the validation here
-		$this->context->buildViolation($constraint->message)
-			->setParameter('{{ value }}', $value)
-			->addViolation();
+		if ($value->getIsPublished()) {
+		  // we are publishing
+
+			if (strlen($value->getDescription()) < 100) {
+				$this->context->buildViolation('Cannot publish: description is too short')
+					->atPath('description')
+					->addViolation();
+			}
+
+			return;
+		}
+
 	}
 }
