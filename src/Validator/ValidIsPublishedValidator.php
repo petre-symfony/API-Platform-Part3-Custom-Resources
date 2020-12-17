@@ -54,7 +54,7 @@ class ValidIsPublishedValidator extends ConstraintValidator {
 
 		//we are UNpublishing
 		if(!$this->security->isGranted('ROLE_ADMIN')){
-			throw new AccessDeniedException('Only admin users can unpublish');
+			//throw new AccessDeniedException('Only admin users can unpublish');
 			$this->context->buildViolation('Only admin users can unpublish')
 				->addViolation();
 		}
