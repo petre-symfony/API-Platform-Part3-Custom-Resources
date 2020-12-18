@@ -19,12 +19,17 @@ use ApiPlatform\Core\Action\NotFoundAction;
  * )
  */
 class DailyStats {
-  /**
-   * @ApiProperty(identifier=true)
-   */
+
   public $date;
 
   public $totalVisitors;
 
   public $mostPopularListings;
+
+  /**
+   * @ApiProperty(identifier=true)
+   */
+  public function getDateToString(){
+    return $this->date->format('Y-m-d');
+  }
 }
