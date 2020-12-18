@@ -13,6 +13,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Serializer\Annotation\SerializedName;
 use Symfony\Component\Validator\Constraints as Assert;
+use App\Doctrine\UserSetIsMvpListener;
 
 /**
  * @ApiResource(
@@ -35,6 +36,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ApiFilter(PropertyFilter::class)
  * @UniqueEntity(fields={"username"})
  * @UniqueEntity(fields={"email"})
+ * @ORM\EntityListeners({UserSetIsMvpListener::class})
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
  */
 class User implements UserInterface {
