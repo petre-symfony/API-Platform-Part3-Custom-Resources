@@ -99,6 +99,13 @@ class User implements UserInterface {
 	 */
   private $isMe = false;
 
+  /**
+   * Returns true if this is this user is an MVP
+   *
+   * @Groups({"user:read"})
+   */
+  private $isMvp = false;
+
   public function __construct() {
     $this->cheeseListings = new ArrayCollection();
   }
@@ -248,5 +255,20 @@ class User implements UserInterface {
 	public function setIsMe(bool $isMe): void {
 		$this->isMe = $isMe;
 	}
+
+  /**
+   * @return bool
+   */
+  public function getIsMvp(): bool {
+    return $this->isMvp;
+  }
+
+  /**
+   * @param bool $isMvp
+   */
+  public function setIsMvp(bool $isMvp): void {
+    $this->isMvp = $isMvp;
+  }
+
 
 }
