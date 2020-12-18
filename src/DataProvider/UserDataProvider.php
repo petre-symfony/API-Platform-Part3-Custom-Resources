@@ -52,7 +52,7 @@ class UserDataProvider implements
     }
 
     $item->setIsMe($this->security->getUser() === $item);
-    
+
     return $item;
   }
 
