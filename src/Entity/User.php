@@ -97,7 +97,7 @@ class User implements UserInterface {
 	 *
 	 * @Groups({"user:read"})
 	 */
-  private $isMe;
+  private $isMe = false;
 
   public function __construct() {
     $this->cheeseListings = new ArrayCollection();
@@ -239,10 +239,6 @@ class User implements UserInterface {
 	 * @return mixed
 	 */
 	public function getIsMe(): bool {
-		if ($this->isMe === null) {
-			throw new \LogicException('The isMe field has not been initialized');
-		}
-
 		return $this->isMe;
 	}
 
