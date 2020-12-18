@@ -4,7 +4,10 @@ namespace App\Entity;
 use ApiPlatform\Core\Annotation\ApiResource;
 
 /**
- * @ApiResource()
+ * @ApiResource(
+ *   itemOperations={},
+ *   collectionOperations={"get"}
+ * )
  */
 class DailyStats {
   public $date;
