@@ -4,9 +4,7 @@ namespace App\Entity;
 use ApiPlatform\Core\Annotation\ApiResource;
 
 /**
- * @ApiResource(
- *   shortName="daily-stats"
- * )
+ * @ApiResource()
  */
 class DailyStats {
   public $date;
