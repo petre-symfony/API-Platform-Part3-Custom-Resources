@@ -1,6 +1,7 @@
 <?php
 namespace App\Entity;
 
+use ApiPlatform\Core\Annotation\ApiProperty;
 use ApiPlatform\Core\Annotation\ApiResource;
 use ApiPlatform\Core\Action\NotFoundAction;
 
@@ -18,6 +19,9 @@ use ApiPlatform\Core\Action\NotFoundAction;
  * )
  */
 class DailyStats {
+  /**
+   * @ApiProperty(identifier=true)
+   */
   public $date;
 
   public $totalVisitors;
