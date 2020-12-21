@@ -33,13 +33,14 @@ class DailyStats {
   public $totalVisitors;
 
   /**
+   * The 5 most popular cheese listings from this date!
+   *
+   * @var array<CheeseListing>|CheeseListing[]
    * @Groups({"daily-stats:read"})
    */
   public $mostPopularListings;
 
   /**
-   * The 5 most popular cheese listings from this date!
-   *
    * @param CheeseListing[] $mostPopularListings
    */
   public function __construct(\DateTimeInterface $date, int $totalVisitors, array $mostPopularListings){
