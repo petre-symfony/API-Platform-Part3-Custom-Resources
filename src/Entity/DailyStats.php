@@ -4,9 +4,11 @@ namespace App\Entity;
 use ApiPlatform\Core\Annotation\ApiProperty;
 use ApiPlatform\Core\Annotation\ApiResource;
 use ApiPlatform\Core\Action\NotFoundAction;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ApiResource(
+ *   normalizationContext={"groups"={"daily-stats:read"}},
  *   itemOperations={
  *     "get"={
  *       "method"="GET",
@@ -20,10 +22,19 @@ use ApiPlatform\Core\Action\NotFoundAction;
  */
 class DailyStats {
 
+  /**
+   * @Groups({"daily-stats:read"})
+   */
   public $date;
 
+  /**
+   * @Groups({"daily-stats:read"})
+   */
   public $totalVisitors;
 
+  /**
+   * @Groups({"daily-stats:read"})
+   */
   public $mostPopularListings;
 
   /**
