@@ -195,6 +195,7 @@ class User implements UserInterface {
 
   /**
    * @Groups({"user:read"})
+   * @return Collection<CheeseListing>
    */
   public function getPublishedCheeseListings(): Collection {
     return $this->cheeseListings->filter(function(CheeseListing $cheeseListing) {
