@@ -38,6 +38,18 @@ class DailyStats {
   public $mostPopularListings;
 
   /**
+   * The 5 most popular cheese listings from this date!
+   *
+   * @param CheeseListing[] $mostPopularListings
+   */
+  public function __construct(\DateTimeInterface $date, int $totalVisitors, array $mostPopularListings){
+    $this->date = $date;
+    $this->totalVisitors = $totalVisitors;
+    $this->mostPopularListings = $mostPopularListings;
+  }
+
+
+  /**
    * @ApiProperty(identifier=true)
    */
   public function getDateToString(){
