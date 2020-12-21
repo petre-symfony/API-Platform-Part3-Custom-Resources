@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use ApiPlatform\Core\Annotation\ApiFilter;
+use ApiPlatform\Core\Annotation\ApiProperty;
 use ApiPlatform\Core\Annotation\ApiResource;
 use ApiPlatform\Core\Serializer\Filter\PropertyFilter;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -194,6 +195,7 @@ class User implements UserInterface {
   }
 
   /**
+   * @ApiProperty(readableLink=true)
    * @Groups({"user:read"})
    * @return Collection<CheeseListing>
    */
