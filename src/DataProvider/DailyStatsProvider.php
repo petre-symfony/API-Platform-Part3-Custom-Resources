@@ -5,6 +5,7 @@ namespace App\DataProvider;
 
 use ApiPlatform\Core\DataProvider\CollectionDataProviderInterface;
 use ApiPlatform\Core\DataProvider\ItemDataProviderInterface;
+use ApiPlatform\Core\DataProvider\Pagination;
 use ApiPlatform\Core\DataProvider\RestrictedDataProviderInterface;
 use App\Entity\DailyStats;
 use App\Service\StatsHelper;
@@ -16,17 +17,25 @@ class DailyStatsProvider implements
 {
 
 	private $statsHelper;
+	private $pagination;
 
-	public function __construct(StatsHelper $statsHelper){
+	public function __construct(
+		StatsHelper $statsHelper,
+		Pagination $pagination
+	){
 
 		$this->statsHelper = $statsHelper;
+		$this->pagination = $pagination;
 	}
 
   public function getCollection(string $resourceClass, string $operationName = null){
+		list($page, $offset, $limit) = $this->pagination
+			->getPagination($resourceClass, $operationName);
+
     return new DailyStatsPaginator(
     	$this->statsHelper,
-			1,
-			3
+			$page,
+			$limit
 		);
   }
 
