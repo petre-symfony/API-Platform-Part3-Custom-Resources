@@ -4,8 +4,12 @@ namespace App\DataProvider;
 
 
 use ApiPlatform\Core\DataProvider\PaginatorInterface;
+use Exception;
+use Traversable;
 
-class DailyStatsPaginator implements PaginatorInterface {
+class DailyStatsPaginator implements PaginatorInterface, \IteratorAggregate {
+	private $dailyStatsIterator;
+
 	public function getLastPage(): float{
 		return 2;
 	}
@@ -26,4 +30,15 @@ class DailyStatsPaginator implements PaginatorInterface {
 	public function count(){
 		return $this->getTotalItems();
 	}
+
+	public function getIterator(){
+		if ($this->dailyStatsIterator === null) {
+			// todo - actually go "load" the stas
+			$this->dailyStatsIterator = new \ArrayIterator([]);
+		}
+
+		return $this->dailyStatsIterator;
+	}
+
+
 }
