@@ -6,34 +6,28 @@ namespace App\DataProvider;
 use ApiPlatform\Core\DataProvider\CollectionDataProviderInterface;
 use ApiPlatform\Core\DataProvider\ItemDataProviderInterface;
 use ApiPlatform\Core\DataProvider\RestrictedDataProviderInterface;
-use ApiPlatform\Core\Exception\ResourceClassNotSupportedException;
 use App\Entity\DailyStats;
-use App\Repository\CheeseListingRepository;
+use App\Service\StatsHelper;
 
 class DailyStatsProvider implements
 	CollectionDataProviderInterface,
 	RestrictedDataProviderInterface,
 	ItemDataProviderInterface
 {
-  private $cheeseListingRepository;
 
-  public function __construct(CheeseListingRepository $cheeseListingRepository){
+	private $statsHelper;
 
-    $this->cheeseListingRepository = $cheeseListingRepository;
-  }
+	public function __construct(StatsHelper $statsHelper){
+
+		$this->statsHelper = $statsHelper;
+	}
 
   public function getCollection(string $resourceClass, string $operationName = null){
-    $listings = $this->cheeseListingRepository->findBy([], [], 5);
-
-    $stats = new DailyStats(new \DateTime(), 1000, $listings);
-
-    $stats2 = new DailyStats(new \DateTime('- 1 days'), 2000, $listings);
-
-    return [$stats, $stats2];
+    return $this->statsHelper->fetchMany();
   }
 
 	public function getItem(string $resourceClass, $id, string $operationName = null, array $context = []){
-		// TODO: Implement getItem() method.
+		dd($id);
 	}
 
   public function supports(string $resourceClass, string $operationName = null, array $context = []): bool{
