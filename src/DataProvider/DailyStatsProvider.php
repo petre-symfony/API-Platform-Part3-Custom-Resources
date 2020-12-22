@@ -23,7 +23,11 @@ class DailyStatsProvider implements
 	}
 
   public function getCollection(string $resourceClass, string $operationName = null){
-    return new DailyStatsPaginator($this->statsHelper);
+    return new DailyStatsPaginator(
+    	$this->statsHelper,
+			1,
+			3
+		);
   }
 
 	public function getItem(string $resourceClass, $id, string $operationName = null, array $context = []){
