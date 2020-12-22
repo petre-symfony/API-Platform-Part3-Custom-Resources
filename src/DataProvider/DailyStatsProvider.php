@@ -27,7 +27,7 @@ class DailyStatsProvider implements
   }
 
 	public function getItem(string $resourceClass, $id, string $operationName = null, array $context = []){
-		dd($id);
+		return $this->statsHelper->fetchOne($id);
 	}
 
   public function supports(string $resourceClass, string $operationName = null, array $context = []): bool{
