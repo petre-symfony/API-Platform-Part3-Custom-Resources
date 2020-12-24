@@ -10,8 +10,12 @@ use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Serializer\NameConverter\NameConverterInterface;
 
 class CheeseSearchFilter extends AbstractFilter {
-  public function __construct(ManagerRegistry $managerRegistry, ?RequestStack $requestStack = null, LoggerInterface $logger = null, array $properties = null, NameConverterInterface $nameConverter = null){
-    parent::__construct($managerRegistry, $requestStack, $logger, $properties, $nameConverter);
+  public function __construct(
+    ManagerRegistry $managerRegistry,
+    ?RequestStack $requestStack = null,
+    NameConverterInterface $nameConverter = null
+  ){
+    parent::__construct($managerRegistry, $requestStack, null, null, $nameConverter);
   }
 
   protected function filterProperty(string $property, $value, QueryBuilder $queryBuilder, QueryNameGeneratorInterface $queryNameGenerator, string $resourceClass, string $operationName = null){
