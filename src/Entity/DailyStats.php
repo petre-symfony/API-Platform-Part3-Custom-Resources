@@ -1,9 +1,10 @@
 <?php
 namespace App\Entity;
 
+use ApiPlatform\Core\Annotation\ApiFilter;
 use ApiPlatform\Core\Annotation\ApiProperty;
 use ApiPlatform\Core\Annotation\ApiResource;
-use ApiPlatform\Core\Action\NotFoundAction;
+use App\ApiPlatform\DailyStatsDateFilter;
 use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
@@ -17,6 +18,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
  *   },
  *   collectionOperations={"get"}
  * )
+ * @ApiFilter(DailyStatsDateFilter::class)
  */
 class DailyStats {
 
