@@ -7,7 +7,15 @@ use Doctrine\ORM\QueryBuilder;
 
 class CheeseSearchFilter extends AbstractFilter {
   protected function filterProperty(string $property, $value, QueryBuilder $queryBuilder, QueryNameGeneratorInterface $queryNameGenerator, string $resourceClass, string $operationName = null){
-    dd($property, $value);
+    if ($property !== 'search'){
+      return;
+    }
+
+    $alias = $queryBuilder->getRootAliases()[0];
+    $queryBuilder
+      ->andWhere(sprintf('%s.title LIKE :search OR %s.description LIKE :search', $alias, $alias))
+      ->setParameter('search', '%'.$value.'%')
+    ;
   }
 
   public function getDescription(string $resourceClass): array {
