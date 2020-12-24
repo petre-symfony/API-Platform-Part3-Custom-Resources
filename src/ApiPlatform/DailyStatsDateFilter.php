@@ -7,6 +7,12 @@ use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 
 class DailyStatsDateFilter implements FilterInterface {
   public const FROM_FILTER_CONTEXT = 'daily_stats_from';
+  private $throwOnInvalid;
+
+  public function __construct(bool $throwOnInvalid = false){
+
+    $this->throwOnInvalid = $throwOnInvalid;
+  }
 
   public function apply(Request $request, bool $normalization, array $attributes, array &$context){
     $from = $request->query->get('from');
@@ -16,7 +22,7 @@ class DailyStatsDateFilter implements FilterInterface {
 
     $fromDate = \DateTimeImmutable::createFromFormat('Y-m-d', $from);
 
-    if (!$fromDate){
+    if (!$fromDate && !$this->throwOnInvalid){
       throw new BadRequestHttpException('Invalid "from" date format');
     }
 
