@@ -13,6 +13,10 @@ class DailyStatsPaginator implements PaginatorInterface, \IteratorAggregate {
 	private $statsHelper;
 	private $currentPage;
 	private $maxResults;
+  /**
+   * @var \DateTimeInterface|null
+   */
+  private $fromDate;
 
 	public function __construct(
 		StatsHelper $statsHelper,
@@ -50,10 +54,15 @@ class DailyStatsPaginator implements PaginatorInterface, \IteratorAggregate {
 		if ($this->dailyStatsIterator === null) {
 			$offset = (($this->getCurrentPage() - 1) * $this->getItemsPerPage());
 
+			$criteria = [];
+			if($this->fromDate){
+			  $criteria['from'] = $this->fromDate;
+      }
 			$this->dailyStatsIterator = new \ArrayIterator(
 				$this->statsHelper->fetchMany(
 					$this->getItemsPerPage(),
-					$offset
+					$offset,
+          $criteria
 				)
 			);
 		}
@@ -61,5 +70,11 @@ class DailyStatsPaginator implements PaginatorInterface, \IteratorAggregate {
 		return $this->dailyStatsIterator;
 	}
 
+  /**
+   * @param \DateTimeInterface|null $fromDate
+   */
+  public function setFromDate(\DateTimeInterface $fromDate): void{
+    $this->fromDate = $fromDate;
+  }
 
 }

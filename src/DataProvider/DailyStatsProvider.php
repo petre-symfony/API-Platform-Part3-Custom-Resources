@@ -32,11 +32,15 @@ class DailyStatsProvider implements
 		list($page, $offset, $limit) = $this->pagination
 			->getPagination($resourceClass, $operationName);
 
-    return new DailyStatsPaginator(
+    $paginator =  new DailyStatsPaginator(
     	$this->statsHelper,
 			$page,
 			$limit
 		);
+
+    $paginator->setFromDate(new \DateTime('2020-08-03'));
+    
+    return $paginator;
   }
 
 	public function getItem(string $resourceClass, $id, string $operationName = null, array $context = []){
