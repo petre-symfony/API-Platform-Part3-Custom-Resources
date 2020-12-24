@@ -2,8 +2,7 @@
 
 namespace App\DataProvider;
 
-
-use ApiPlatform\Core\DataProvider\CollectionDataProviderInterface;
+use ApiPlatform\Core\DataProvider\ContextAwareCollectionDataProviderInterface;
 use ApiPlatform\Core\DataProvider\ItemDataProviderInterface;
 use ApiPlatform\Core\DataProvider\Pagination;
 use ApiPlatform\Core\DataProvider\RestrictedDataProviderInterface;
@@ -11,7 +10,7 @@ use App\Entity\DailyStats;
 use App\Service\StatsHelper;
 
 class DailyStatsProvider implements
-	CollectionDataProviderInterface,
+	ContextAwareCollectionDataProviderInterface,
 	RestrictedDataProviderInterface,
 	ItemDataProviderInterface
 {
@@ -28,7 +27,9 @@ class DailyStatsProvider implements
 		$this->pagination = $pagination;
 	}
 
-  public function getCollection(string $resourceClass, string $operationName = null){
+  public function getCollection(string $resourceClass, string $operationName = null, array $context = []){
+	  dd($context);
+
 		list($page, $offset, $limit) = $this->pagination
 			->getPagination($resourceClass, $operationName);
 
