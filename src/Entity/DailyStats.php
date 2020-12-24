@@ -18,7 +18,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
  *   },
  *   collectionOperations={"get"}
  * )
- * @ApiFilter(DailyStatsDateFilter::class)
+ * @ApiFilter(DailyStatsDateFilter::class, arguments={"throwOnInvalid"=true})
  */
 class DailyStats {
 
