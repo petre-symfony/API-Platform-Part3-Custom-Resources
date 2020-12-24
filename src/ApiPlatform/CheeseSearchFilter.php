@@ -11,7 +11,7 @@ class CheeseSearchFilter extends AbstractFilter {
   }
 
   public function getDescription(string $resourceClass): array {
-    dd($this->properties);
+    
   }
 
 }
