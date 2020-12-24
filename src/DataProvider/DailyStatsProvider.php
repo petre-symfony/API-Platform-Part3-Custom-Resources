@@ -39,7 +39,7 @@ class DailyStatsProvider implements
 		);
 
     $paginator->setFromDate(new \DateTime('2020-08-03'));
-    
+
     return $paginator;
   }
 

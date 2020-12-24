@@ -6,7 +6,7 @@ use Symfony\Component\HttpFoundation\Request;
 
 class DailyStatsDateFilter implements FilterInterface {
   public function apply(Request $request, bool $normalization, array $attributes, array &$context){
-    // TODO: Implement apply() method.
+    dd($request->query->all());
   }
 
   public function getDescription(string $resourceClass): array{
