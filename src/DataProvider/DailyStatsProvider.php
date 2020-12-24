@@ -6,6 +6,7 @@ use ApiPlatform\Core\DataProvider\ContextAwareCollectionDataProviderInterface;
 use ApiPlatform\Core\DataProvider\ItemDataProviderInterface;
 use ApiPlatform\Core\DataProvider\Pagination;
 use ApiPlatform\Core\DataProvider\RestrictedDataProviderInterface;
+use App\ApiPlatform\DailyStatsDateFilter;
 use App\Entity\DailyStats;
 use App\Service\StatsHelper;
 
@@ -28,7 +29,6 @@ class DailyStatsProvider implements
 	}
 
   public function getCollection(string $resourceClass, string $operationName = null, array $context = []){
-	  dd($context);
 
 		list($page, $offset, $limit) = $this->pagination
 			->getPagination($resourceClass, $operationName);
@@ -39,7 +39,10 @@ class DailyStatsProvider implements
 			$limit
 		);
 
-    $paginator->setFromDate(new \DateTime('2020-08-03'));
+    $fromDate = $context[DailyStatsDateFilter::FROM_FILTER_CONTEXT] ?? null;
+    if ($fromDate) {
+      $paginator->setFromDate($fromDate);
+    }
 
     return $paginator;
   }
