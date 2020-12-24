@@ -12,9 +12,11 @@ class CheeseSearchFilter extends AbstractFilter {
     }
 
     $alias = $queryBuilder->getRootAliases()[0];
+    // a param name that is guaranteed unique in this query
+    $valueParameter = $queryNameGenerator->generateParameterName('search');
     $queryBuilder
-      ->andWhere(sprintf('%s.title LIKE :search OR %s.description LIKE :search', $alias, $alias))
-      ->setParameter('search', '%'.$value.'%')
+      ->andWhere(sprintf('%s.title LIKE :%s OR %s.description LIKE :%s', $alias, $valueParameter, $alias, $valueParameter))
+      ->setParameter($valueParameter, '%'.$value.'%')
     ;
   }
 
