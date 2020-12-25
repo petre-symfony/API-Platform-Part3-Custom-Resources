@@ -162,7 +162,7 @@ class CheeseListing {
   public function getCreatedAt(): ?\DateTimeInterface {
     return $this->createdAt;
   }
-  
+
   public function getIsPublished(): ?bool {
     return $this->isPublished;
   }
