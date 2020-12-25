@@ -88,7 +88,6 @@ class CheeseListingResourceTest extends CustomApiTestCase {
     $this->assertJsonContains(['hydra:member' => [
       0 => [
         '@id' => '/api/cheeses/' . $cheeseListing2->getId(),
-        '@type' => 'cheese',
         'title' => 'cheese2',
         'description' => 'cheese',
         'price' => 1000,
@@ -163,7 +162,7 @@ class CheeseListingResourceTest extends CustomApiTestCase {
     $client = self::createClient();
     $user = UserFactory::new()->create();
 
-    $cheeseListing = CheeseListingFactory::new()->create([
+    $cheeseListing = CheeseListingFactory::new()->withLongDescription()->create([
       'owner' => $user,
     ]);
 
