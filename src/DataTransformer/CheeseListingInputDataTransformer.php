@@ -3,6 +3,7 @@ namespace App\DataTransformer;
 
 
 use ApiPlatform\Core\DataTransformer\DataTransformerInterface;
+use ApiPlatform\Core\Serializer\AbstractItemNormalizer;
 use App\DTO\CheeseListingInput;
 use App\Entity\CheeseListing;
 
@@ -11,7 +12,12 @@ class CheeseListingInputDataTransformer implements DataTransformerInterface {
    * @param CheeseListingInput $input
    */
   public function transform($input, string $to, array $context = []){
-    $cheeseListing = new CheeseListing($input->title);
+    if (isset($context[AbstractItemNormalizer::OBJECT_TO_POPULATE])) {
+      $cheeseListing = $context[AbstractItemNormalizer::OBJECT_TO_POPULATE];
+    } else {
+      $cheeseListing = new CheeseListing($input->title);
+    }
+    
     $cheeseListing->setDescription($input->description);
     $cheeseListing->setPrice($input->price);
     $cheeseListing->setOwner($input->owner);
