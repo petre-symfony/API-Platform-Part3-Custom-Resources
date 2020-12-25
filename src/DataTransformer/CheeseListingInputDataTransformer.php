@@ -12,6 +12,7 @@ class CheeseListingInputDataTransformer implements DataTransformerInterface {
    * @param CheeseListingInput $input
    */
   public function transform($input, string $to, array $context = []){
+    dump($input);
     if (isset($context[AbstractItemNormalizer::OBJECT_TO_POPULATE])) {
       $cheeseListing = $context[AbstractItemNormalizer::OBJECT_TO_POPULATE];
     } else {
