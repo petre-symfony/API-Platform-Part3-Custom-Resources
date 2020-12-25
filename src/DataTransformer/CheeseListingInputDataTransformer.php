@@ -17,7 +17,7 @@ class CheeseListingInputDataTransformer implements DataTransformerInterface {
     } else {
       $cheeseListing = new CheeseListing($input->title);
     }
-    
+
     $cheeseListing->setDescription($input->description);
     $cheeseListing->setPrice($input->price);
     $cheeseListing->setOwner($input->owner);
