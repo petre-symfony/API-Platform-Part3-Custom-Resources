@@ -7,8 +7,11 @@ use App\DTO\CheeseListingInput;
 use App\Entity\CheeseListing;
 
 class CheeseListingInputDataTransformer implements DataTransformerInterface {
-  public function transform($object, string $to, array $context = []){
-    dump($object, $to, $context);
+  /**
+   * @param CheeseListingInput $input
+   */
+  public function transform($input, string $to, array $context = []){
+    dump($input, $to, $context);
 
     return new CheeseListing();
   }
