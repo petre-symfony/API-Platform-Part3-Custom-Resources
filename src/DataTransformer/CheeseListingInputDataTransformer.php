@@ -3,16 +3,23 @@ namespace App\DataTransformer;
 
 
 use ApiPlatform\Core\DataTransformer\DataTransformerInterface;
+use App\DTO\CheeseListingInput;
+use App\Entity\CheeseListing;
 
 class CheeseListingInputDataTransformer implements DataTransformerInterface {
   public function transform($object, string $to, array $context = []){
-    // TODO: Implement transform() method.
+    dump($object, $to, $context);
+
+    return new CheeseListing();
   }
 
   public function supportsTransformation($data, string $to, array $context = []): bool {
-    dump($data, $to, $context);
+    if ($data instanceof CheeseListing) {
+      //already transformed
+      return false;
+    }
 
-    return false;
+    return $to===CheeseListing::CLASS && ($context['input']['class'] ?? null) === CheeseListingInput::class;
   }
 
 }
