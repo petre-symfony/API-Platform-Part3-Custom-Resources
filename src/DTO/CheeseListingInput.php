@@ -7,22 +7,29 @@ use Symfony\Component\Serializer\Annotation\SerializedName;
 
 class CheeseListingInput {
   /**
+   * @var string
+   *
    * @Groups({"cheese:write", "user:write"})
    */
   public $title;
   /**
+   * @var int
+   *
    * @Groups({"cheese:write", "user:write"})
    */
   public $price;
   /**
    * @var User
+   *
    * @Groups({"cheese:collection:post"})
    */
   public $owner;
   /**
+   * @var bool
+   *
    * @Groups({"cheese:write"})
    */
-  public $isPublished;
+  public $isPublished = false;
 
   public $description;
 
