@@ -24,7 +24,7 @@ use App\DTO\CheeseListingOutput;
  *   normalizationContext={"groups"={"cheese:read"}},
  *   denormalizationContext={"groups"={"cheese:write"}},
  *   itemOperations={
- *     "get"={
+ *     "get" = {
  *       "normalization_context"={"groups"={"cheese:read", "cheese:item:get"}},
  *     },
  *     "put"={
