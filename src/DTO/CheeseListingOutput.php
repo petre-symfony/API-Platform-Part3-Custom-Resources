@@ -2,13 +2,13 @@
 
 namespace App\DTO;
 
-use ApiPlatform\Core\Annotation\ApiResource;
 
-/**
- * @ApiResource(
- *
- * )
- */
+
+use Symfony\Component\Serializer\Annotation\Groups;
+
 class CheeseListingOutput {
+  /**
+   * @Groups({"cheese:read"})
+   */
   public $title;
 }
