@@ -13,7 +13,7 @@ class CheeseListingOutput {
   /**
    * The title of this listing
    *
-   * @Groups({"cheese:read"})
+   * @Groups({"cheese:read", "user:read"})
    */
   public string $title;
 
@@ -23,7 +23,7 @@ class CheeseListingOutput {
   public string $description;
 
   /**
-   * @Groups({"cheese:read"})
+   * @Groups({"cheese:read", "user:read"})
    */
   public int $price;
 

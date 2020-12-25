@@ -195,7 +195,6 @@ class User implements UserInterface {
   }
 
   /**
-   * @ApiProperty(readableLink=false)
    * @Groups({"user:read"})
    * @SerializedName("cheeseListings")
    * @return Collection<CheeseListing>
