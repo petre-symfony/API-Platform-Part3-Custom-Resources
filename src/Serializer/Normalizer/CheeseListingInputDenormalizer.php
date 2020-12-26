@@ -34,20 +34,11 @@ class CheeseListingInputDenormalizer implements DenormalizerInterface , Cacheabl
 
   private function createDto(array $context): CheeseListingInput {
     $entity = $context['object_to_populate'] ?? null;
-    dump($entity);
-    $dto = new CheeseListingInput();
-    // not an edit, so just return an empty DTO
-    if (!$entity) {
-      return $dto;
-    }
-    if (!$entity instanceof CheeseListing) {
+
+    if ($entity && !$entity instanceof CheeseListing) {
       throw new \Exception(sprintf('Unexpected resource class "%s"', get_class($entity)));
     }
-    $dto->title = $entity->getTitle();
-    $dto->price = $entity->getPrice();
-    $dto->description = $entity->getDescription();
-    $dto->owner = $entity->getOwner();
-    $dto->isPublished = $entity->getIsPublished();
-    return $dto;
+
+    return CheeseListingInput::createFromEntity($entity);
   }
 }
