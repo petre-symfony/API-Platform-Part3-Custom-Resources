@@ -55,6 +55,7 @@ class User implements UserInterface {
    * @ORM\Column(type="uuid", unique=true)
    * @ApiProperty(identifier=true)
    * @Groups({"user:write"})
+   * @SerializedName("id")
    */
   private $uuid;
 

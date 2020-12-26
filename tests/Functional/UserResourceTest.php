@@ -35,7 +35,7 @@ class UserResourceTest extends CustomApiTestCase {
     $uuid = Uuid::uuid4();
     $client->request('POST', '/api/users', [
       'json' => [
-        'uuid' => $uuid,
+        'id' => $uuid,
         'email' => 'cheeseplease@example.com',
         'username' => 'cheeseplease',
         'password' => 'brie'
