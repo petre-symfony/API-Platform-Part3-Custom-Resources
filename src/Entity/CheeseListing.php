@@ -41,7 +41,7 @@ use Ramsey\Uuid\Nonstandard\Uuid;
  *   shortName="cheese",
  *   attributes={
  *     "pagination_items_per_page"=10,
- *     "formats"={"jsonld", "html", "jsonhal", "csv"={"text/csv"}}
+ *     "formats"={"jsonld", "json", "html", "jsonhal", "csv"={"text/csv"}}
  *   }
  * )
  * @ApiFilter(BooleanFilter::class, properties={"isPublished"})
