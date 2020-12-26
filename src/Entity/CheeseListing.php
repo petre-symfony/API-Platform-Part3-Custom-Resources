@@ -9,10 +9,8 @@ use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\RangeFilter;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
 use ApiPlatform\Core\Serializer\Filter\PropertyFilter;
 use App\ApiPlatform\CheeseSearchFilter;
-use App\Validator\IsValidOwner;
 use App\Validator\ValidIsPublished;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Validator\Constraints as Assert;
 use App\DTO\CheeseListingOutput;
 use App\DTO\CheeseListingInput;
 
@@ -70,18 +68,11 @@ class CheeseListing {
   /**
    * @ORM\Column(type="string", length=255)
 
-   * @Assert\NotBlank()
-   * @Assert\Length(
-   *     min=2,
-   *     max=50,
-   *     maxMessage="Describe your cheese in 50 chars or less"
-   * )
    */
   private $title;
 
   /**
    * @ORM\Column(type="text")
-   * @Assert\NotBlank()
    */
   private $description;
 
@@ -89,8 +80,6 @@ class CheeseListing {
    * The price of this delicious cheese, in cents
    *
    * @ORM\Column(type="integer")
-
-   * @Assert\NotBlank()
    */
   private $price;
 
@@ -107,7 +96,6 @@ class CheeseListing {
   /**
    * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="cheeseListings")
    * @ORM\JoinColumn(nullable=false)
-   * @IsValidOwner()
    */
   private $owner;
 
