@@ -13,6 +13,7 @@ use App\Validator\ValidIsPublished;
 use Doctrine\ORM\Mapping as ORM;
 use App\DTO\CheeseListingOutput;
 use App\DTO\CheeseListingInput;
+use Ramsey\Uuid\Nonstandard\Uuid;
 
 /**
  * @ApiResource(
@@ -106,6 +107,7 @@ class CheeseListing {
   public function __construct(string $title = null) {
     $this->title = $title;
     $this->createdAt = new \DateTimeImmutable();
+    $this->uuid=Uuid::uuid4();
   }
 
   public function getId(): ?int {
