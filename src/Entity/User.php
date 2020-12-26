@@ -47,11 +47,13 @@ class User implements UserInterface {
    * @ORM\Id()
    * @ORM\GeneratedValue()
    * @ORM\Column(type="integer")
+   * @ApiProperty(identifier=false)
    */
   private $id;
 
   /**
    * @ORM\Column(type="uuid", unique=true)
+   * @ApiProperty(identifier=true)
    */
   private $uuid;
 
