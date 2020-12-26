@@ -66,6 +66,10 @@ class CheeseListing {
   private $id;
 
   /**
+   * @ORM\Column(type="uuid", unique=true)
+   */
+  private $uuid;
+  /**
    * @ORM\Column(type="string", length=255)
 
    */
