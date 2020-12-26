@@ -19,6 +19,12 @@ class UserResourceTest extends CustomApiTestCase {
     ]);
     $this->assertResponseStatusCodeSame(201);
 
+    $user = UserFactory::repository()->findOneBy(['email' => 'cheeseplease@example.com']);
+    $this->assertNotNull($user);
+    $this->assertJsonContains([
+      '@id' => '/api/users/' . $user->getUuid()->toString()
+    ]);
+
     $this->logIn($client, 'cheeseplease@example.com', 'brie');
   }
 
