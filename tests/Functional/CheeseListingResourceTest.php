@@ -32,12 +32,12 @@ class CheeseListingResourceTest extends CustomApiTestCase {
     $this->assertResponseStatusCodeSame(201);
 
     $client->request('POST', '/api/cheeses', [
-      'json' => $cheesyData + ['owner' => '/api/users/'.$otherUser->getId()],
+      'json' => $cheesyData + ['owner' => '/api/users/'.$otherUser->getUuid()],
     ]);
     $this->assertResponseStatusCodeSame(400, 'not passing the correct owner');
 
     $client->request('POST', '/api/cheeses', [
-      'json' => $cheesyData + ['owner' => '/api/users/'.$authenticatedUser->getId()],
+      'json' => $cheesyData + ['owner' => '/api/users/'.$authenticatedUser->getUuid()],
     ]);
     $this->assertResponseStatusCodeSame(201);
   }
@@ -54,7 +54,7 @@ class CheeseListingResourceTest extends CustomApiTestCase {
     $this->logIn($client, $user2);
     $client->request('PUT', '/api/cheeses/'.$cheeseListing->getId(), [
       // try to trick security by reassigning to this user
-      'json' => ['title' => 'updated', 'owner' => '/api/users/'.$user2->getId()]
+      'json' => ['title' => 'updated', 'owner' => '/api/users/'.$user2->getUuid()]
     ]);
     $this->assertResponseStatusCodeSame(403, 'only author can updated');
 
@@ -91,7 +91,7 @@ class CheeseListingResourceTest extends CustomApiTestCase {
         'title' => 'cheese2',
         'description' => 'cheese',
         'price' => 1000,
-        'owner' => '/api/users/' . $user->getId(),
+        'owner' => '/api/users/' . $user->getUuid(),
         'shortDescription' => 'cheese',
         'createdAtAgo' => '1 second ago',
       ]
@@ -109,7 +109,7 @@ class CheeseListingResourceTest extends CustomApiTestCase {
     $client->request('GET', '/api/cheeses/'.$cheeseListing1->getId());
     $this->assertResponseStatusCodeSame(404);
 
-    $response = $client->request('GET', '/api/users/'.$otherUser->getId());
+    $response = $client->request('GET', '/api/users/'.$otherUser->getUuid());
     $data = $response->toArray();
     $this->assertEmpty($data['cheeseListings']);
   }
