@@ -5,6 +5,7 @@ namespace App\Tests\Functional;
 use App\Entity\User;
 use App\Factory\UserFactory;
 use App\Test\CustomApiTestCase;
+use Ramsey\Uuid\Uuid;
 
 class UserResourceTest extends CustomApiTestCase {
   public function testCreateUser() {
@@ -26,6 +27,25 @@ class UserResourceTest extends CustomApiTestCase {
     ]);
 
     $this->logIn($client, 'cheeseplease@example.com', 'brie');
+  }
+
+  public function testCreateUserWithUuid() {
+    $client = self::createClient();
+
+    $uuid = Uuid::uuid4();
+    $client->request('POST', '/api/users', [
+      'json' => [
+        'uuid' => $uuid,
+        'email' => 'cheeseplease@example.com',
+        'username' => 'cheeseplease',
+        'password' => 'brie'
+      ]
+    ]);
+    $this->assertResponseStatusCodeSame(201);
+
+    $this->assertJsonContains([
+      '@id' => '/api/users/' . $uuid
+    ]);
   }
 
   public function testUpdateUser() {
