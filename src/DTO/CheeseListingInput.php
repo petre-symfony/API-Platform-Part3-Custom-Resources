@@ -52,11 +52,11 @@ class CheeseListingInput {
 
   public function createOrUpdateEntity(?CheeseListing $cheeseListing): CheeseListing {
     if (!$cheeseListing) {
-      $cheeseListing = new CheeseListing($this->title);
+      $cheeseListing = new CheeseListing((string) $this->title);
     }
 
-    $cheeseListing->setDescription($this->description);
-    $cheeseListing->setPrice($this->price);
+    $cheeseListing->setDescription((string) $this->description);
+    $cheeseListing->setPrice((int) $this->price);
     $cheeseListing->setOwner($this->owner);
     $cheeseListing->setIsPublished($this->isPublished);
 
