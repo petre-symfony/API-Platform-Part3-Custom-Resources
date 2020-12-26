@@ -39,7 +39,8 @@ class UserResourceTest extends CustomApiTestCase {
         'email' => 'cheeseplease@example.com',
         'username' => 'cheeseplease',
         'password' => 'brie'
-      ]
+      ],
+      'headers' => ['Content-Type' => 'application/ld+json']
     ]);
     $this->assertResponseStatusCodeSame(201);
 
